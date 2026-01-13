@@ -41,7 +41,7 @@ class Vegetable(Planst):
         elif self.season == "winter":
             value = "Vitamin D"
         elif self.season == "spring":
-            value = "Vitamin E"
+            value = "Vitamin-E"
         else:
             value = "Vitamin C"
 
