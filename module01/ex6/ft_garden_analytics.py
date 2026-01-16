@@ -30,7 +30,7 @@ class FloweringPlant(Planst):
 
     def score(self):
         if (self.is_bloom):
-            bonus = 5
+            bonus = 5 
         else:
             bonus = 0
         return super().score() + bonus
