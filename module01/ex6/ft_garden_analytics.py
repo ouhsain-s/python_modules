@@ -58,30 +58,32 @@ class GardenManager:
         self.manager_name = manager_name
         self.garden_plants = []
         self.total_growth = 0
-        self.num_plants = 0
+        self.regular = 0
+        self.flowering = 0
+        self.prize = 0
         GardenManager.num_of_gardens += 1
 
     def add_new_plant(self, name: str, height: int):
 
         new_plant = Plant(name, height)
         self.garden_plants.append(new_plant)
-        self.num_plants += 1
+        self.regular += 1
         print(f"Added {name} to {self.manager_name} garden")
 
-    def add_new_Flowering_Plant(self, name: str, height: int, color: str,
+    def add_new_flowering_plant(self, name: str, height: int, color: str,
                                 is_bloom: bool):
 
         new_plant = FloweringPlant(name, height, color, is_bloom)
         self.garden_plants.append(new_plant)
-        self.num_plants += 1
+        self.flowering += 1
         print(f"Added {name} to {self.manager_name} garden")
 
-    def add_new_Prize_Flower(self, name: str, height: int, color: str,
+    def add_new_prize_flower(self, name: str, height: int, color: str,
                              is_bloom: bool, points: int):
 
         new_plant = PrizeFlower(name, height, color, is_bloom, points)
         self.garden_plants.append(new_plant)
-        self.num_plants += 1
+        self.prize += 1
         print(f"Added {name} to {self.manager_name} garden")
 
     def grow_all(self):
@@ -91,7 +93,28 @@ class GardenManager:
 
     def report(self):
 
+        n_plants = self.regular + self.prize + self.flowering
         print(f"=== {self.manager_name}'s Garden Report ===")
         print("Plants in garden:")
         for plant in self.garden_plants:
-            plant.report()
+            print(plant.report())
+        print(f"\nPlants added: {n_plants}, Total growth: {self.total_growth}cm")
+        print(f"Plant types: {self.regular} regular", end="")
+        print(f", {self.flowering} flowering, {self.prize} prize flowers")
+
+    def total_score(self):
+        sum_score = 0
+        for score in self.garden_plants:
+            sum_score += score.score()
+        return sum_score
+
+
+if (__name__ == "__main__"):
+    alice = GardenManager("Alice")
+    alice.add_new_plant("Oak Tree", 100)
+    alice.add_new_flowering_plant("Rose", 25, "red", True)
+    alice.add_new_prize_flower("Sunflower", 50, "yellow", True, 10)
+    print(end="\n")
+    alice.grow_all()
+    print(end="\n")
+    alice.report()
