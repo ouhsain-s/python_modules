@@ -1,34 +1,35 @@
 class Plant:
-    def __init__(self, name: str, height: int):
+    def __init__(self, name: str, height: int) -> None:
         self.name = name
         self.height = height
 
-    def grow(self):
+    def grow(self) -> None:
         self.height += 1
         print(f"{self.name} grew 1cm")
 
-    def report(self):
+    def report(self) -> str:
         return (f"{self.name}: {self.height}cm")
 
-    def score(self):
+    def score(self) -> int:
         return self.height
 
 
 class FloweringPlant(Plant):
 
-    def __init__(self, name: str, height: int, color: str, is_bloom: bool):
+    def __init__(self, name: str, height: int, color: str,
+                 is_bloom: bool) -> None:
         super().__init__(name, height)
         self.color = color
         self.is_bloom = is_bloom
 
-    def report(selfe):
+    def report(selfe) -> str:
         if (selfe.is_bloom):
             status = "(blooming)"
         else:
             status = "(not blooming)"
         return (f"{super().report()}, {selfe.color} flowers " + status)
 
-    def score(self):
+    def score(self) -> int:
         if (self.is_bloom):
             bonus = 15
         else:
@@ -39,14 +40,14 @@ class FloweringPlant(Plant):
 class PrizeFlower(FloweringPlant):
 
     def __init__(self, name: str, height: int, color: str, is_bloom: bool,
-                 points: int):
+                 points: int) -> None:
         super().__init__(name, height, color, is_bloom)
         self.points = points
 
-    def report(self):
+    def report(self) -> str:
         return super().report() + f", Prize points: {self.points}"
 
-    def score(self):
+    def score(self) -> int:
         return super().score() + self.points
 
 
@@ -63,7 +64,8 @@ class GardenManager:
         self.prize = 0
         GardenManager.num_of_gardens += 1
 
-    def add_new_plant(self, name: str, height: int, show_messag: bool = True):
+    def add_new_plant(self, name: str, height: int,
+                      show_messag: bool = True) -> None:
 
         new_plant = Plant(name, height)
         self.garden_plants.append(new_plant)
@@ -72,7 +74,7 @@ class GardenManager:
             print(f"Added {name} to {self.manager_name} garden")
 
     def add_new_flowering_plant(self, name: str, height: int, color: str,
-                                is_bloom: bool):
+                                is_bloom: bool) -> None:
 
         new_plant = FloweringPlant(name, height, color, is_bloom)
         self.garden_plants.append(new_plant)
@@ -80,23 +82,23 @@ class GardenManager:
         print(f"Added {name} to {self.manager_name} garden")
 
     def add_new_prize_flower(self, name: str, height: int, color: str,
-                             is_bloom: bool, points: int):
+                             is_bloom: bool, points: int) -> None:
 
         new_plant = PrizeFlower(name, height, color, is_bloom, points)
         self.garden_plants.append(new_plant)
         self.prize += 1
         print(f"Added {name} to {self.manager_name} garden")
 
-    def grow_all(self):
+    def grow_all(self) -> None:
         for plant in self.garden_plants:
             plant.grow()
             self.total_growth += 1
 
     class GardenStats:
-        def __init__(self, manager):
+        def __init__(self, manager) -> None:
             self.manager = manager
 
-        def get_plants_status(self):
+        def get_plants_status(self) -> None:
             n_plants = self.manager.regular + self.manager.prize
             n_plants += self.manager.flowering
             print(f"\nPlants added: {n_plants}, Total growth: "
@@ -105,25 +107,25 @@ class GardenManager:
             print(f", {self.manager.flowering} flowering, {self.manager.prize}"
                   f" prize flowers")
 
-    def report(self):
+    def report(self) -> None:
 
         print(f"=== {self.manager_name}'s Garden Report ===")
         print("Plants in garden:")
         for plant in self.garden_plants:
             print(plant.report())
 
-    def show_status(self):
+    def show_status(self) -> None:
         status = self.GardenStats(self)
         status.get_plants_status()
 
-    def total_score(self):
+    def total_score(self) -> int:
         sum_score = 0
         for score in self.garden_plants:
             sum_score += score.score()
         return sum_score
 
     @classmethod
-    def create_garden_network(cls, manegers: list[str]):
+    def create_garden_network(cls, manegers: list[str]) -> list:
         network = []
         for manager in manegers:
             garden = cls(manager)
@@ -131,7 +133,7 @@ class GardenManager:
         return network
 
     @staticmethod
-    def is_height_validate(height: int):
+    def is_height_validate(height: int) -> None:
         if (height > 0):
             print("Height validation test: True")
         else:
