@@ -12,7 +12,6 @@ class Plant:
 
 
 if __name__ == "__main__":
-
     print("=== Plant Factory Output ===")
     rose = Plant("Rose", 25, 30)
     oak = Plant("Oak", 200, 365)
