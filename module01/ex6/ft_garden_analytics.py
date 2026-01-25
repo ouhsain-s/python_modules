@@ -71,7 +71,7 @@ class GardenManager:
         self.garden_plants.append(new_plant)
         self.regular += 1
         if (show_messag):
-            print(f"Added {name} to {self.manager_name} garden")
+            print(f"Added {name} to {self.manager_name}'s garden")
 
     def add_new_flowering_plant(self, name: str, height: int, color: str,
                                 is_bloom: bool) -> None:
@@ -79,7 +79,7 @@ class GardenManager:
         new_plant = FloweringPlant(name, height, color, is_bloom)
         self.garden_plants.append(new_plant)
         self.flowering += 1
-        print(f"Added {name} to {self.manager_name} garden")
+        print(f"Added {name} to {self.manager_name}'s garden")
 
     def add_new_prize_flower(self, name: str, height: int, color: str,
                              is_bloom: bool, points: int) -> None:
@@ -87,9 +87,10 @@ class GardenManager:
         new_plant = PrizeFlower(name, height, color, is_bloom, points)
         self.garden_plants.append(new_plant)
         self.prize += 1
-        print(f"Added {name} to {self.manager_name} garden")
+        print(f"Added {name} to {self.manager_name}'s garden")
 
     def grow_all(self) -> None:
+        print("Alice is helping all plants grow...")
         for plant in self.garden_plants:
             plant.grow()
             self.total_growth += 1
@@ -141,18 +142,19 @@ class GardenManager:
 
 
 if (__name__ == "__main__"):
+    print("=== Garden Management System Demo ===\n")
     alice, bob = GardenManager.create_garden_network(["Alice", "Bob"])
     alice.add_new_plant("Oak Tree", 100)
     alice.add_new_flowering_plant("Rose", 25, "red", True)
     alice.add_new_prize_flower("Sunflower", 50, "yellow", True, 10)
-    bob.add_new_plant("Oak Tree", 92)
+    bob.add_new_plant("Oak Tree", 92, False)
     print(end="\n")
     alice.grow_all()
     print(end="\n")
     alice.report()
     alice.show_status()
-    GardenManager.is_height_validate(alice.garden_plants[0].height)
     print(end="\n")
+    GardenManager.is_height_validate(alice.garden_plants[0].height)
     print(f"Garden scores - Alice: {alice.total_score()},"
           f" Bob: {bob.total_score()}")
     print(f"Total gardens managed: {GardenManager.num_of_gardens}")
