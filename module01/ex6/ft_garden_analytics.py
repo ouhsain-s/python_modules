@@ -8,7 +8,7 @@ class Plant:
         print(f"{self.name} grew 1cm")
 
     def report(self) -> str:
-        return (f"{self.name}: {self.height}cm")
+        return (f"- {self.name}: {self.height}cm")
 
     def score(self) -> int:
         return self.height
