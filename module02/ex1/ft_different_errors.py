@@ -12,7 +12,8 @@ def garden_operations(err_type: str):
             return "Caught ZeroDivisionError: division by zero"
     elif err_type == "FileNotFoundError":
         try:
-            open("missing.txt", "r")
+            file = open("missing.txt", "r")
+            file.close()
         except FileNotFoundError:
             return ("Caught FileNotFoundError: No such file 'missing.txt'")
     elif err_type == "KeyError":
