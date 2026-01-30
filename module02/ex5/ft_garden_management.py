@@ -22,9 +22,10 @@ class Plant:
 
 
 class Garden:
-    def __init__(self, owner):
+    def __init__(self, owner, tank):
         self.owner = owner
         self.plants = []
+        self.tank = tank
 
 
 class GardenManager:
@@ -38,17 +39,21 @@ class GardenManager:
         except PlantError as e:
             print(e)
 
-    def water_plants(garden: Garden, water_range: int):
+    def water_plants(cls, garden: Garden, water_range: int):
         print("Opening watering system")
         try:
             for plant in garden.plants:
+                cls.check_tank(garden, water_range)
                 if plant is None or water_range < 0:
                     raise WaterError("water NOT-valid plant!")
                 else:
                     plant.water += water_range
+                    garden.tank -= water_range
                     print(f"Watering {plant.name} - success")
         except WaterError as e:
             print(e)
+        except GardenError as e:
+            print(e, "\nSystem recovered and continuing...")
         finally:
             print("Closing watering system (cleanup)")
 
@@ -75,9 +80,13 @@ class GardenManager:
         except GardenError as e:
             print(e)
 
+    def check_tank(garden: Garden, water_requested):
+        if garden.tank < water_requested:
+            raise GardenError("Caught GardenError: Not enough water in tank")
+
 
 def test_garden_management():
-    bramz = Garden("Bramz")
+    bramz = Garden("Bramz", 12)
     tomato = Plant("tomato", 0, 8)
     lettuce = Plant("tettuce", 10, 8)
     empty = Plant("", 9, 9)
@@ -89,13 +98,17 @@ def test_garden_management():
     GardenManager.add_plant(empty, bramz)
     print(end="\n")
     print("Watering plants...")
-    GardenManager.water_plants(bramz, 5)
+    GardenManager.water_plants(GardenManager, bramz, 5)
     print(end="\n")
     print("Checking plant health...")
     GardenManager.check_plant_health(GardenManager, bramz)
     print("")
     print("Testing error recovery...")
-    print("")
+    try:
+        GardenManager.check_tank(bramz, 2)
+    except GardenError as e:
+        print(e, "\nSystem recovered and continuing...")
+    print(end="\n")
     print("Garden management system test complete!")
 
 
