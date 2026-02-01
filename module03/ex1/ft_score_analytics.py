@@ -11,7 +11,7 @@ else:
             scores.append(int(score))
         except ValueError:
             scores.append(0)
-    print(f"Scores processed: {str(scores)}")
+    print(f"Scores processed: {scores}")
     print("Total players:", len(scores))
     print("Total score:", sum(scores))
     print("Average score:", sum(scores) / len(scores))
