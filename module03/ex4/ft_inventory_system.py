@@ -31,10 +31,38 @@ def inventory_statistics(inventory_dict: dict, most: str, least: str):
     print(f"Least abundant: {least} ({least_value} {statment})")
 
 
+def classification_items(inventory_dict: dict, categories_dict: dict):
+    scarce_avg = {"scarce_min": 0, "scarce_max": 4}
+    moderate_avg = {"moderate_min": 5, "moderate_max": 9}
+    abundant_avg = {"abundant_min": 10, "abundant_max": 9999}
+
+    for key, value in inventory_dict.items():
+
+        min_avg = scarce_avg.get("scarce_min")
+        max_avg = scarce_avg.get("scarce_max")
+        if value >= min_avg and value <= max_avg:
+            categories_dict["scarce"].update({key: value})
+        min_avg = moderate_avg.get("moderate_min")
+        max_avg = moderate_avg.get("moderate_max")
+        if value >= min_avg and value <= max_avg:
+            categories_dict["moderate"].update({key: value})
+        min_avg = abundant_avg.get("abundant_min")
+        max_avg = abundant_avg.get("abundant_max")
+        if value >= min_avg and value <= max_avg:
+            categories_dict["abundant"].update({key: value})
+
+
+def show_items_categories(categories_dict: dict):
+    print("=== Item Categories ===")
+    print("Moderate:", categories_dict.get("moderate"))
+    print("Scarce:", categories_dict.get("scarce"))
+
+
 def inventory_manager():
     inventory_dict = {"potion": 5, "armor": 3, "shield": 2,
                       "sword": 1, "helmet": 1}
     total_items = 0
+
     for item in inventory_dict.values():
         total_items += item
     unique_items = len(inventory_dict.keys())
@@ -55,9 +83,21 @@ def inventory_manager():
         elif inventory_dict.get(item) < inventory_dict.get(least_abundant):
             least_abundant = item
 
+    scarce_dict = {}
+    moderate_dict = {}
+    abundant_dict = {}
+
+    categories_dict = {"scarce": scarce_dict, "moderate": moderate_dict,
+                       "abundant": abundant_dict}
+
     show_inventory_analysis(total_items, unique_items)
+    print(end="\n")
     current_inventory(inventory_dict, total_items)
+    print(end="\n")
     inventory_statistics(inventory_dict, most_abundant, least_abundant)
+    print(end="\n")
+    classification_items(inventory_dict, categories_dict)
+    show_items_categories(categories_dict)
 
 
 if __name__ == "__main__":
