@@ -58,6 +58,26 @@ def show_items_categories(categories_dict: dict):
     print("Scarce:", categories_dict.get("scarce"))
 
 
+def properties_dimo(inventory_dict: dict):
+    print("=== Dictionary Properties Demo ===")
+    print("Dictionary keys:", list(inventory_dict.keys()))
+    print("Dictionary values:", list(inventory_dict.values()))
+    print("Sample lookup - 'sword' in inventory:", 'sword' in inventory_dict)
+
+
+def managment_suggestions(categories_dict: dict):
+    print_first_comma = False
+    print("=== Management Suggestions ===")
+    print("Restock needed: [", end="")
+    for key, value in categories_dict["scarce"].items():
+        if value <= 1:
+            if print_first_comma:
+                print(", ", end="")
+            print_first_comma = True
+            print(f"'{key}'", end="")
+    print("]")
+
+
 def inventory_manager():
     inventory_dict = {"potion": 5, "armor": 3, "shield": 2,
                       "sword": 1, "helmet": 1}
@@ -98,6 +118,8 @@ def inventory_manager():
     print(end="\n")
     classification_items(inventory_dict, categories_dict)
     show_items_categories(categories_dict)
+    managment_suggestions(categories_dict)
+    properties_dimo(inventory_dict)
 
 
 if __name__ == "__main__":
