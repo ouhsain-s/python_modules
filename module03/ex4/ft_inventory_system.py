@@ -1,7 +1,7 @@
-def show_inventory_analysis(total_items: int, unique_ites: int) -> None:
+def show_inventory_analysis(total_items: int, unique_items: int) -> None:
     print("=== Inventory System Analysis ===")
     print("Total items in inventory:", total_items)
-    print("Unique item types:", unique_ites)
+    print("Unique item types:", unique_items)
 
 
 def current_inventory(inventory_dict: dict, total_items: int):
@@ -33,31 +33,31 @@ def inventory_statistics(inventory_dict: dict, most: str, least: str):
 
 def inventory_manager():
     inventory_dict = {"potion": 5, "armor": 3, "shield": 2,
-                      "sowrd": 1, "helmet": 1}
+                      "sword": 1, "helmet": 1}
     total_items = 0
     for item in inventory_dict.values():
         total_items += item
-    unique_ites = len(inventory_dict.keys())
+    unique_items = len(inventory_dict.keys())
 
-    most_aboundant = ""
-
-    for item in inventory_dict.keys():
-        if (most_aboundant == ""):
-            most_aboundant = item
-        elif (inventory_dict.get(item)) > (inventory_dict.get(most_aboundant)):
-            most_aboundant = item
-
-    least_aboundant = ""
+    most_abundant = ""
 
     for item in inventory_dict.keys():
-        if (least_aboundant == ""):
-            least_aboundant = item
-        elif inventory_dict.get(item) < inventory_dict.get(least_aboundant):
-            least_aboundant = item
+        if (most_abundant == ""):
+            most_abundant = item
+        elif (inventory_dict.get(item)) > (inventory_dict.get(most_abundant)):
+            most_abundant = item
 
-    show_inventory_analysis(total_items, unique_ites)
+    least_abundant = ""
+
+    for item in inventory_dict.keys():
+        if (least_abundant == ""):
+            least_abundant = item
+        elif inventory_dict.get(item) < inventory_dict.get(least_abundant):
+            least_abundant = item
+
+    show_inventory_analysis(total_items, unique_items)
     current_inventory(inventory_dict, total_items)
-    inventory_statistics(inventory_dict, most_aboundant, least_aboundant)
+    inventory_statistics(inventory_dict, most_abundant, least_abundant)
 
 
 if __name__ == "__main__":
