@@ -31,7 +31,7 @@ def show_coordinate_system():
     """ txample 1 : with correct coordinate """
     print("Position created:", pos2_x1)
     print(f"Distance between {pos1_x1} and {pos2_x1}:"
-          f" {distance:.2f}")
+          f" {distance}")
     """ txample 2 : with correct coordinate """
     print(end="\n")
     dest = "3,4,0"

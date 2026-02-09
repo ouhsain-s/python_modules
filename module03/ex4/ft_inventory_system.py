@@ -42,10 +42,12 @@ def classification_items(inventory_dict: dict, categories_dict: dict):
         max_avg = scarce_avg.get("scarce_max")
         if value >= min_avg and value <= max_avg:
             categories_dict["scarce"].update({key: value})
+
         min_avg = moderate_avg.get("moderate_min")
         max_avg = moderate_avg.get("moderate_max")
         if value >= min_avg and value <= max_avg:
             categories_dict["moderate"].update({key: value})
+
         min_avg = abundant_avg.get("abundant_min")
         max_avg = abundant_avg.get("abundant_max")
         if value >= min_avg and value <= max_avg:
