@@ -8,16 +8,17 @@ def main():
             for chr in file1.read():
                 print(chr, end="")
     except FileNotFoundError as e:
-        e = "//"
+        e = "ERROR: Storage vault not found."
         print("ERROR:", e)
     try:
-        with open("security_protocols.txt", "r") as file2:
-            print("SECURE PRESERVATION:")
+        with open("security_protocols.txt", "w") as file2:
+            print("\n\nSECURE PRESERVATION:")
             file2.write("[CLASSIFIED] New security protocols archived\n")
             print("[CLASSIFIED] New security protocols archived")
-    except:
-        e = "//"
-        print("ERROR:", e)
+            print("Vault automatically sealed upon completion")
+    except Exception:
+        print("ERROR: Failed to preserve data.")
+    print("\nAll vault operations completed with maximum security.")
 
 
 if __name__ == "__main__":
