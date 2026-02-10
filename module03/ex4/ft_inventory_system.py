@@ -4,7 +4,7 @@ def show_inventory_analysis(total_items: int, unique_items: int) -> None:
     print("Unique item types:", unique_items)
 
 
-def current_inventory(inventory_dict: dict, total_items: int):
+def current_inventory(inventory_dict: dict, total_items: int) -> None:
     print("=== Current Inventory ===")
     for item in inventory_dict.keys():
         current_value = inventory_dict.get(item)
@@ -16,7 +16,7 @@ def current_inventory(inventory_dict: dict, total_items: int):
         print(f"{item}: {current_value} {statment} ({persontag:.1f}%)")
 
 
-def inventory_statistics(inventory_dict: dict, most: str, least: str):
+def inventory_statistics(inventory_dict: dict, most: str, least: str) -> None:
     most_value = inventory_dict.get(most)
     if most_value > 1:
         statment = "units"
@@ -31,7 +31,7 @@ def inventory_statistics(inventory_dict: dict, most: str, least: str):
     print(f"Least abundant: {least} ({least_value} {statment})")
 
 
-def classification_items(inventory_dict: dict, categories_dict: dict):
+def classification_items(inventory_dict: dict, categories_dict: dict) -> None:
     scarce_avg = {"scarce_min": 0, "scarce_max": 4}
     moderate_avg = {"moderate_min": 5, "moderate_max": 9}
     abundant_avg = {"abundant_min": 10, "abundant_max": 9999}
@@ -54,20 +54,20 @@ def classification_items(inventory_dict: dict, categories_dict: dict):
             categories_dict["abundant"].update({key: value})
 
 
-def show_items_categories(categories_dict: dict):
+def show_items_categories(categories_dict: dict) -> None:
     print("=== Item Categories ===")
     print("Moderate:", categories_dict.get("moderate"))
     print("Scarce:", categories_dict.get("scarce"))
 
 
-def properties_dimo(inventory_dict: dict):
+def properties_dimo(inventory_dict: dict) -> None:
     print("=== Dictionary Properties Demo ===")
     print("Dictionary keys:", list(inventory_dict.keys()))
     print("Dictionary values:", list(inventory_dict.values()))
     print("Sample lookup - 'sword' in inventory:", 'sword' in inventory_dict)
 
 
-def managment_suggestions(categories_dict: dict):
+def managment_suggestions(categories_dict: dict) -> None:
     print_first_comma = False
     print("=== Management Suggestions ===")
     print("Restock needed: [", end="")
@@ -80,7 +80,7 @@ def managment_suggestions(categories_dict: dict):
     print("]")
 
 
-def inventory_manager():
+def inventory_manager() -> None:
     inventory_dict = {"potion": 5, "armor": 3, "shield": 2,
                       "sword": 1, "helmet": 1}
     total_items = 0

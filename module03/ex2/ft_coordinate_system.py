@@ -20,7 +20,7 @@ def get_distance(pos1: tuple, pos2: tuple) -> float:
     return (dist)
 
 
-def show_coordinate_system():
+def show_coordinate_system() -> None:
     print("=== Game Coordinate System ===\n")
     start = "0, 0, 0"
     dest = "10, 20, 5"

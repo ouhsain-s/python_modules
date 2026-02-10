@@ -21,12 +21,12 @@ def show_analytics(total_events: int, high_level: int, treasure: int,
     print("Level-up events:", level_up)
 
 
-def compute_time():
+def compute_time() -> None:
     print("Memory usage: Constant (streaming)")
     print("Processing time: 0.045 seconds")
 
 
-def fibonacci_sequence(count) -> Generator:
+def fibonacci_sequence(count: int) -> Generator:
     n1 = 0
     n2 = 1
     tmp = 0
@@ -37,7 +37,7 @@ def fibonacci_sequence(count) -> Generator:
         n2 += tmp
 
 
-def prime_numbers():
+def prime_numbers() -> Generator:
     yield 2
     for i in range(3, 100000):
         is_prime = True
@@ -49,7 +49,7 @@ def prime_numbers():
             yield i
 
 
-def generator_demonstration():
+def generator_demonstration() -> None:
     count = 10
     t = count
     print("=== Generator Demonstration ===")
@@ -70,7 +70,7 @@ def generator_demonstration():
     print(end="\n")
 
 
-def main():
+def main() -> None:
     num_events = 1000
     buffer_displaying = 3
     type_events = {0: "found treasure", 1: "killed monster",
