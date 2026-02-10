@@ -1,4 +1,4 @@
-def main():
+def main() -> None:
     print("=== CYBER ARCHIVES - VAULT SECURITY SYSTEM ===\n")
     try:
         with open("classified_data.txt", "r") as file1:

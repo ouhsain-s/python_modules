@@ -1,4 +1,4 @@
-def read_file(fname):
+def read_file(fname: str) -> None:
     try:
         with open(fname, "r") as file1:
             print(f"SUCCESS: Archive recovered - ``{file1.read()}''")
@@ -14,7 +14,7 @@ def read_file(fname):
         print("STATUS: Crisis handled, system stable")
 
 
-def main():
+def main() -> None:
     print("=== CYBER ARCHIVES - CRISIS RESPONSE SYSTEM ===\n")
     print("CRISIS ALERT: Attempting access to 'lost_archive.txt'...")
     read_file("lost_archive.txt")
