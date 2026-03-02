@@ -1,7 +1,8 @@
 def main() -> None:
     print("=== CYBER ARCHIVES - VAULT SECURITY SYSTEM ===\n")
+    filename = "classified_data.txt"
     try:
-        with open("classified_data.txt", "r") as file1:
+        with open(filename, "r") as file1:
             print("Initiating secure vault access...")
             print("Vault connection established with failsafe protocols\n")
             print("SECURE EXTRACTION:")
@@ -10,8 +11,9 @@ def main() -> None:
     except FileNotFoundError as e:
         e = "ERROR: Storage vault not found."
         print("ERROR:", e)
+    filename = "security_protocols.txt"
     try:
-        with open("security_protocols.txt", "w") as file2:
+        with open(filename, "w") as file2:
             print("\n\nSECURE PRESERVATION:")
             file2.write("[CLASSIFIED] New security protocols archived\n")
             print("[CLASSIFIED] New security protocols archived")
