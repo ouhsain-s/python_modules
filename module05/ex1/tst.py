@@ -268,32 +268,34 @@ def initializing_event_stream(event_stream: EventStream) -> None:
     print(f"Event analysis: {event_stream.process_batch(data_batch)}")
 
 
-def polymorphic_stream_processing(sensor_stream: SensorStream,
-                                  trans_stream: TransactionStream,
-                                  event_stream: EventStream) -> None:
+def polymorphic_stream_processing(streams: list) -> None:
     """Demonstrate polymorphism by processing all streams
     through same interface.StreamProcessor handles different
     types without knowing their details."""
-    stream_porcess = StreamProcessor()
+    stream_porcessor = StreamProcessor()
 
-    stream_porcess.add_stream(sensor_stream)
-    stream_porcess.add_stream(trans_stream)
-    stream_porcess.add_stream(event_stream)
+    for stream in streams:
+        stream_porcessor.add_stream(stream)
 
-    sensor_data = ["temp:20.0", "humidity:70"]
-    trans_data = ["buy:200", "sell:100", "buy:50", "sell:50"]
-    event_data = ["login", "logout", "login"]
+    sensor_data = ["temp:25.0", "humidity:73"]
+    trans_data = ["buy:22", "sell:10", "buy:50", "sell:30"]
+    event_data = ["login", "error", "ERROR"]
 
     stream_data: Dict[DataStream, List[str]] = {}
-    stream_data[sensor_stream] = sensor_data
-    stream_data[trans_stream] = trans_data
-    stream_data[event_stream] = event_data
 
+    for stream in streams:
+        if isinstance(stream, SensorStream):
+            stream_data[stream] = sensor_data
+        elif isinstance(stream, TransactionStream):
+            stream_data[stream] = trans_data
+        elif isinstance(stream, TransactionStream):
+            stream_data[stream] = event_data
+    
     print("\n=== Polymorphic Stream Processing ===")
     print("Processing mixed stream types through unified interface...")
 
     print("\nBatch 1 Results:")
-    stream_porcess.process_all(stream_data)
+    stream_porcessor.(stream_data)
 
 
 def stream_filtering_active(sensor_stream: SensorStream,
@@ -305,15 +307,11 @@ def stream_filtering_active(sensor_stream: SensorStream,
     sensor_critical = ["temp:35.5", "temp:40.0", "humidity:50", "temp:32.0"]
     trans_large = ["buy:200", "sell:100", "buy:180"]
 
-    sensor_filtered = sensor_stream.filter_data(sensor_critical, "critical")
-    trans_filtered = trans_stream.filter_data(trans_large, "large")
-
-    critical_count = len(sensor_filtered)
-
-    large_count = len(trans_filtered)
-
-    print(f"Filtered results: {critical_count} critical sensor alerts, "
-          f"{large_count} large transaction")
+    print("Filtered results:"
+          f" {len(sensor_stream.filter_data(sensor_critical, "critical"))}"
+          " critical sensor alerts, "
+          f"{len(trans_stream.filter_data(trans_large, "large"))}"
+          " large transaction")
 
 
 def main():
