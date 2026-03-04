@@ -88,15 +88,15 @@ class LogProcessor(DataProcessor):
         result = ""
         if self.validate(data):
             try:
-                type_ivent, event = data.split(":", 1)
-                if type_ivent == "ERROR":
-                    result = (f"[ALERT] {type_ivent} level detected:"
+                event_type, event = data.split(":", 1)
+                if event_type == "ERROR":
+                    result = (f"[ALERT] {event_type} level detected:"
                               f"{event}")
-                elif type_ivent == "INFO":
-                    result = (f"[INFO] {type_ivent} level detected:"
+                elif event_type == "INFO":
+                    result = (f"[INFO] {event_type} level detected:"
                               f"{event}")
                 else:
-                    result = (f"[{type_ivent}] {type_ivent} level "
+                    result = (f"[{event_type}] {event_type} level "
                               f"detected: {event}")
                 print("Validation: Log entry verified")
                 return result
