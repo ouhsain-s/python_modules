@@ -23,7 +23,7 @@ print("\nTesting package-level access (controlled by __init__.py):")
 try:
     safe_call(alchemy.create_fire, "alchemy.create_fire()")
     safe_call(alchemy.create_water, "alchemy.create_water()")
-except ArithmeticError:
+except AttributeError:
     print("AttributeError - not exposed")
 
 try:

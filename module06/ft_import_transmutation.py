@@ -1,8 +1,3 @@
-# import alchemy
-# from alchemy.elements import create_water
-# from alchemy.potions import healing_potion as heal
-# from alchemy import
-
 import alchemy.elements
 from alchemy.elements import create_water
 from alchemy.potions import healing_potion as heal, strength_potion
