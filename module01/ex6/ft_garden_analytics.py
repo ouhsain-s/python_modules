@@ -96,7 +96,7 @@ class GardenManager:
             self.total_growth += 1
 
     class GardenStats:
-        def __init__(self, manager) -> None:
+        def __init__(self, manager: str) -> None:
             self.manager = manager
 
         def get_plants_status(self) -> None:

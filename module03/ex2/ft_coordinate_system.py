@@ -1,7 +1,7 @@
 import math
 
 
-def pars_coordinate(pos_str: str) -> tuple:
+def parse_coordinate(pos_str: str) -> tuple:
     try:
         x, y, z = [int(i) for i in pos_str.split(",")]
     except ValueError as e:
@@ -24,35 +24,36 @@ def show_coordinate_system() -> None:
     print("=== Game Coordinate System ===\n")
     start = "0, 0, 0"
     dest = "10, 20, 5"
-    pos1_x1 = pars_coordinate(start)
-    pos2_x1 = pars_coordinate(dest)
+    pos1_x1 = parse_coordinate(start)
+    pos2_x1 = parse_coordinate(dest)
     if pos1_x1 and pos2_x1:
         distance = get_distance(pos1_x1, pos2_x1)
-    """ txample 1 : with correct coordinate """
-    print("Position created:", pos2_x1)
-    print(f"Distance between {pos1_x1} and {pos2_x1}:"
-          f" {distance}")
-    """ txample 2 : with correct coordinate """
+
+        print("Position created:", pos2_x1)
+        print(f"Distance between {pos1_x1} and {pos2_x1}:"
+              f" {distance:.2f}")
+
     print(end="\n")
     dest = "3,4,0"
-    pos1_x2 = pars_coordinate(start)
-    pos2_x2 = pars_coordinate(dest)
+    pos1_x2 = parse_coordinate(start)
+    pos2_x2 = parse_coordinate(dest)
     if pos1_x2 and pos2_x2:
         distance = get_distance(pos1_x2, pos2_x2)
-    print(f"Parsing coordinates: \"{dest}\"")
-    print("Parsed position:", pos2_x2)
-    print(f"Distance between {pos1_x2} and {pos2_x2}: {distance}")
-    """ example 3 : with invalid cordinates """
+        print(f"Parsing coordinates: \"{dest}\"")
+        print("Parsed position:", pos2_x2)
+        print(f"Distance between {pos1_x2} and {pos2_x2}: {distance}")
+
     print(end="\n")
     dest = "abc,def,ghi"
-    pos1_x3 = pars_coordinate(start)
-    pos2_x3 = pars_coordinate(dest)
+    pos1_x3 = parse_coordinate(start)
+    pos2_x3 = parse_coordinate(dest)
     if pos1_x3 and pos2_x3:
         distance = get_distance(pos1_x3, pos2_x3)
-    """ example 4 : with invalid cordinates """
+        print("Distance is ", distance)
+
     print("\nUnpacking demonstration:")
     dest = "3,4,0"
-    tst_unpacking = pars_coordinate(dest)
+    tst_unpacking = parse_coordinate(dest)
     if tst_unpacking:
         x, y, z = tst_unpacking
         print(f"Player at x={x}, y={y}, z={z}")

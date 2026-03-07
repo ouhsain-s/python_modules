@@ -1,5 +1,6 @@
-
-def water_plants(plant_list):
+def water_plants(plant_list: list) -> None:
+    """Water each plant in the list, handling invalid entries safely.
+    Ensures cleanup actions always run in the finally block."""
     is_valid = False
     print("Opening watering system")
     try:
@@ -16,7 +17,9 @@ def water_plants(plant_list):
             print("Watering completed successfully!")
 
 
-def test_watering_system():
+def test_watering_system() -> None:
+    """Run tests for the garden watering system with normal and error cases.
+    Demonstrates that cleanup always executes."""
     print("=== Garden Watering System ===\n")
     print("Testing normal watering...")
     plants = ["tomato", "lettuce", "carrots"]

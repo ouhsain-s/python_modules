@@ -65,7 +65,7 @@ class SensorStream(DataStream):
 
 
 class TransactionStream(DataStream):
-    def __init__(self, stream_id):
+    def __init__(self, stream_id: str) -> None:
         super().__init__(stream_id)
         self.operations = 0
         self.net_flow = 0
@@ -107,7 +107,7 @@ class TransactionStream(DataStream):
 
 
 class EventStream(DataStream):
-    def __init__(self, stream_id):
+    def __init__(self, stream_id: str) -> None:
         super().__init__(stream_id)
         self.num_events = 0
         self.num_errors = 0
@@ -161,7 +161,7 @@ class StreamProcessor:
                 print(f"- Sensor data: {stream.count} readings processed")
             elif isinstance(stream, TransactionStream):
                 print(f"- Transaction data: {stream.operations} "
-                      f"operations processed")
+                      "operations processed")
             elif isinstance(stream, EventStream):
                 print(f"- Event data: {stream.num_events} events processed")
 
@@ -171,7 +171,7 @@ def initializing_sensor() -> SensorStream:
     data = ["temp:22.5", "humidity:65", "pressure:1013"]
     sensor = SensorStream("TRANS_001")
     stat = sensor.get_stats()
-    print(f"Stream ID:{stat["stream_id"]}, Type: {stat["type"]}")
+    print(f"Stream ID:{stat['stream_id']}, Type: {stat['type']}")
     print("Processing sensor batch:", data)
     print(sensor.process_batch(data))
     sensor.count = 0
@@ -184,7 +184,7 @@ def initializing_transactions() -> TransactionStream:
     data = ["buy:100", "sell:150", "buy:75"]
 
     print("Initializing Transaction Stream...")
-    print(f"Stream ID: {stat["stream_id"]}, Type: {stat["type"]}")
+    print(f"Stream ID: {stat['stream_id']}, Type: {stat['type']}")
     print("Processing transaction batch:", data)
     print(transaction.process_batch(data))
     transaction.operations = 0
@@ -197,7 +197,7 @@ def initializing_events() -> EventStream:
     data = ["login", "error", "ERROR", "logout"]
 
     print("Initializing Event Stream...")
-    print(f"Stream ID: {stat["stream_id"]}, Type: {stat["type"]}")
+    print(f"Stream ID: {stat['stream_id']}, Type: {stat['type']}")
     print("Processing event batch:", data)
     print(events.process_batch(data))
     events.num_events = 0
@@ -245,9 +245,9 @@ def stream_filtering_active(sensor_stream: SensorStream,
     trans_large = ["buy:100", "sell:300", "buy:70"]
 
     print("Filtered results:"
-          f" {len(sensor_stream.filter_data(sensor_critical, "critical"))}"
+          f" {len(sensor_stream.filter_data(sensor_critical, 'critical'))}"
           " critical sensor alerts, "
-          f"{len(trans_stream.filter_data(trans_large, "large"))}"
+          f"{len(trans_stream.filter_data(trans_large, 'large'))}"
           " large transaction")
 
 

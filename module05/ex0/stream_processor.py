@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List, Dict, Union, Optional
 from abc import ABC, abstractmethod
 
 
@@ -20,7 +20,7 @@ class NumericProcessor(DataProcessor):
 
         print(f"Processing data: {data}")
         try:
-            tmp = []
+            tmp: List = []
             num_format = ""
             if self.validate(data):
                 if data.__class__.__name__ == "list":
@@ -86,9 +86,11 @@ class LogProcessor(DataProcessor):
     def process(self, data: Any) -> str:
         print(f"Processing data: \"{data}\"")
         result = ""
+        items: Dict = {}
         if self.validate(data):
             try:
                 event_type, event = data.split(":", 1)
+                items[event_type] = event
                 if event_type == "ERROR":
                     result = (f"[ALERT] {event_type} level detected:"
                               f"{event}")
@@ -118,7 +120,8 @@ def processing_multiple_data(proc_type: Any, data: Any) -> str:
         return obj_type.format_output(format)
 
 
-def main():
+def main(data: Optional[Union[NumericProcessor,
+                              TextProcessor, LogProcessor]] = None):
     print("=== CODE NEXUS - DATA PROCESSOR FOUNDATION ===\n")
     print("Initializing Numeric Processor...")
     nums = NumericProcessor()

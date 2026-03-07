@@ -30,7 +30,7 @@ def fibonacci_sequence(count: int) -> Generator:
     n1 = 0
     n2 = 1
     tmp = 0
-    for i in range(count):
+    for _ in range(count):
         yield n1
         tmp = n1
         n1 = n2

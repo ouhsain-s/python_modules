@@ -1,3 +1,6 @@
+import sys
+
+
 def show_inventory_analysis(total_items: int, unique_items: int) -> None:
     print("=== Inventory System Analysis ===")
     print("Total items in inventory:", total_items)
@@ -80,9 +83,30 @@ def managment_suggestions(categories_dict: dict) -> None:
     print("]")
 
 
+def get_info_as_args() -> dict:
+    re_dict = {}
+    try:
+        if len(sys.argv) < 2:
+            raise ValueError("items not found")
+        for arg in sys.argv[1:]:
+            arg = arg.strip()
+            key, value = arg.split(":", 1)
+            if not key or value == "":
+                raise ValueError("- args can not be empty")
+            re_dict[key] = int(value)
+            if value > 9999:
+                raise ValueError("item can not be mor than 9999")
+    except Exception as e:
+        print("invalid item detected!!"
+              " could not add item to inventory", e)
+        return None
+    return re_dict
+
+
 def inventory_manager() -> None:
-    inventory_dict = {"potion": 5, "armor": 3, "shield": 2,
-                      "sword": 1, "helmet": 1}
+    inventory_dict = get_info_as_args()
+    if inventory_dict is None:
+        return
     total_items = 0
 
     for item in inventory_dict.values():
@@ -120,7 +144,9 @@ def inventory_manager() -> None:
     print(end="\n")
     classification_items(inventory_dict, categories_dict)
     show_items_categories(categories_dict)
+    print(end="\n")
     managment_suggestions(categories_dict)
+    print(end="\n")
     properties_dimo(inventory_dict)
 
 

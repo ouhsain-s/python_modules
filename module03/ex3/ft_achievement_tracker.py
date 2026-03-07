@@ -1,10 +1,10 @@
 def show_achievement_tracker() -> None:
     print("=== Achievement Tracker System ===\n")
-    alice = set('first_kill', 'level_10', 'treasure_hunter', 'speed_demon',
-                'first_kill')
-    bob = set('first_kill', 'level_10', 'boss_slayer', 'collector')
-    charlie = set('level_10', 'treasure_hunter', 'boss_slayer', 'speed_demon',
-                  'perfectionist')
+    alice = set(['first_kill', 'level_10', 'treasure_hunter', 'speed_demon',
+                'first_kill'])
+    bob = set(['first_kill', 'level_10', 'boss_slayer', 'collector'])
+    charlie = set(['level_10', 'treasure_hunter', 'boss_slayer', 'speed_demon',
+                  'perfectionist'])
     print("Player alice achievements:", alice)
     print("Player bob achievements:", bob)
     print("Player charlie achievements:", charlie)

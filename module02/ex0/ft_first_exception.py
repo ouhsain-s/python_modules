@@ -1,4 +1,6 @@
-def check_temperature(temp_str: str):
+def check_temperature(temp_str: str) -> str:
+    """Validate a temperature string and return a plant suitability message.
+    Ensures value is an integer between 0 and 40°C."""
     try:
         temp = int(temp_str)
         if (0 <= temp <= 40):
@@ -11,7 +13,9 @@ def check_temperature(temp_str: str):
         return (f"Error: '{temp_str}' is not a valid number")
 
 
-def test_temperature_input():
+def test_temperature_input() -> None:
+    """Run predefined test cases to verify temperature validation behavior.
+    Prints results and confirms the program handles errors safely."""
     print("=== Garden Temperature Checker ===")
     print(end="\n")
 

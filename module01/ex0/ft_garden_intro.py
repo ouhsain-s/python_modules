@@ -7,4 +7,7 @@ def print_garden_intro(plant: str, height: int, age: int) -> None:
 
 
 if __name__ == "__main__":
+    name = "Rose"
+    height = 25
+    age = 30
     print_garden_intro("Rose", 25, 30)

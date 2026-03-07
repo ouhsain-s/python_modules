@@ -1,8 +1,9 @@
-def garden_operations(err_type: str):
-
+def garden_operations(err_type: str) -> str:
+    """Simulate different error scenarios in garden operations.
+    Returns a message describing the caught exception."""
     if err_type == "ValueError":
         try:
-            num = int("invalid input")
+            num = int("abc")
         except ValueError:
             return "Caught ValueError: invalid literal for int()"
     elif err_type == "ZeroDivisionError":
@@ -32,7 +33,9 @@ def garden_operations(err_type: str):
             return ("Caught an error, but program continues!")
 
 
-def test_error_types():
+def test_error_types() -> None:
+    """Run tests for all garden error scenarios.
+    Prints results for each type to verify error handling."""
     print("=== Garden Error Types Demo ===\n")
     print("Testing ValueError...")
     print(garden_operations("ValueError"))
