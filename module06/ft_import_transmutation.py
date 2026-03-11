@@ -1,7 +1,8 @@
 import alchemy.elements
-from alchemy.elements import create_water
-from alchemy.potions import healing_potion as heal, strength_potion
-from alchemy.elements import create_fire, create_earth
+from alchemy.elements import create_fire
+from alchemy.potions import healing_potion as heal
+from alchemy.potions import strength_potion
+from alchemy.elements import create_water, create_earth
 
 
 def first_method() -> None:
