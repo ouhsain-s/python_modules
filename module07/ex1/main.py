@@ -28,8 +28,7 @@ def main():
         print(f"Drew: {c.name} ({tp})")
         print("Play result:", c.play({}), "\n")
 
-
-print("Polymorphism in action: Same interface, different card behaviors!")
+    print("Polymorphism in action: Same interface, different card behaviors!")
 
 
 if __name__ == "__main__":
