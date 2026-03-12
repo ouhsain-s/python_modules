@@ -1,6 +1,7 @@
 import random
 from typing import List
 from ex0.Card import Card
+from math import ceil
 
 
 class Deck:
@@ -25,8 +26,6 @@ class Deck:
             raise IndexError("draw from empty deck")
         return self.cards.pop(0)
 
-    # def get_play_result(result: dict):
-    #     print(f"play result: card_played : {} {} {} {}")
     def get_deck_stats(self) -> dict:
         creatures = sum(1 for c in self.cards
                         if type(c).__name__ == "CreatureCard")
@@ -36,7 +35,7 @@ class Deck:
                         if type(c).__name__ == "ArtifactCard")
         total = len(self.cards)
         total_cost = sum(getattr(c, "cost", 0) for c in self.cards)
-        avg_cost = total_cost / total if total else 0.0
+        avg_cost = float(ceil(total_cost / total if total else 0.0))
         return {
             "total_cards": total,
             "creatures": creatures,

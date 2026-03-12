@@ -17,8 +17,8 @@ class CreatureCard(Card):
         self.health = health
 
     def play(self, game_state: dict) -> dict:
-        game_state["card_played"] = self.name,
-        game_state["mana_used"] = self.cost,
+        game_state["card_played"] = self.name
+        game_state["mana_used"] = self.cost
         game_state["effect"] = "Creature summoned to battlefield"
         return game_state
 

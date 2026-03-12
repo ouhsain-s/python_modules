@@ -10,18 +10,16 @@ class ArtifactCard(Card):
         self.effect = effect
 
     def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
-        effect_text = self.resolve_effect([])
         game_state["card_played"] = self.name
         game_state["mana_used"] = self.cost
-        game_state["effect"] = effect_text
+        game_state["effect"] = self.effect
         return game_state
 
     def activate_ability(self) -> Dict[str, Any]:
         if self.durability <= 0:
             return {"activated": False, "reason": "broken"}
         self.durability -= 1
-        res = {"activated": True, "name": self.name, "effect": self.effect,
-               "remaining": self.durability}
+        res = {"activated": True, "name": self.name, "effect": self.effect}
         if self.durability <= 0:
             res["destroyed"] = True
         return res
