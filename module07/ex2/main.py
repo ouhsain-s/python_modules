@@ -1,30 +1,30 @@
-"""Simple demonstration script for ex2 Ability System.
-Run with: python3 -m ex2.main
-"""
 from ex2.EliteCard import EliteCard
 from ex0.Card import Card
+from ex2.Combatable import Combatable
+from ex2.Magical import Magical
 
 
-def _callable_public_names(obj) -> list:
-    return sorted([
-        name for name in dir(obj)
-        if not name.startswith("_") and callable(getattr(obj, name))
-    ])
+def _callable_public_names(cls) -> list:
+    return [
+        name for name, value in cls.__dict__.items()
+        if callable(value) and not name.startswith("_")
+    ]
 
 
 def main():
     print("=== DataDeck Ability System ===")
     print()
 
-    # show capabilities
     print("EliteCard capabilities:")
     print(f"- Card: {_callable_public_names(Card)}")
-    print(f"- Combatable: {['attack', 'defend', 'get_combat_stats']}")
-    print(f"- Magical: {['cast_spell', 'channel_mana', 'get_magic_stats']}\n")
+    print(f"- Combatable: {_callable_public_names(Combatable)}")
+    print(f"- Magical: {_callable_public_names(Magical)}")
 
     c = EliteCard("Arcane Warrior", cost=3)
 
-    print(f"Playing {getattr(c, 'name', 'Unknown')} (Elite Card):\n")
+    print(f"\nPlaying {getattr(c, 'name', 'Unknown')}"
+          f"({c.__class__.__name__}):\n")
+
     print("Combat phase:")
     attack_res = c.attack("Enemy")
     print("Attack result:", attack_res)
