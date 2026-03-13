@@ -11,7 +11,6 @@ class GameEngine:
         self.strategy = strategy
 
     def simulate_turn(self) -> dict:
-        # نخلق عناصر: Fire Dragon, Goblin, Lightning (نحاول دائمًا إنشاءها)
         created = []
         try:
             d = self.factory.create_creature("dragon")

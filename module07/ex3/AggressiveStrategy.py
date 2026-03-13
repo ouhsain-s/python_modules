@@ -16,7 +16,7 @@ class AggressiveStrategy(GameStrategy):
             if isinstance(cost, (int, float)) and cost <= 3:
                 cards_played.append(name)
                 mana_used += cost
-                damage += int(cost) + 1
+                damage += int(cost) + 1.5
 
             elif not isinstance(cost, (int, float)):
                 lname = str(name).lower()
@@ -33,7 +33,7 @@ class AggressiveStrategy(GameStrategy):
         }
 
     def get_strategy_name(self) -> str:
-        return "AggressiveStrategy"
+        return self.__class__.__name__
 
     def prioritize_targets(self, available_targets: list) -> list:
         return sorted(available_targets)

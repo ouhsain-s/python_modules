@@ -16,7 +16,7 @@ def fmt_card(card):
 
 
 def main():
-    print("=== DataDeck Game Engine ===")
+    print("=== DataDeck Game Engine ===\n")
     print("Configuring Fantasy Card Game...")
 
     engine = GameEngine()
@@ -28,6 +28,7 @@ def main():
     print("Factory:", factory.__class__.__name__)
     print("Strategy:", strategy.get_strategy_name())
     print("Available types:", factory.get_supported_types())
+    print(end="\n")
 
     print("Simulating aggressive turn...")
     data = engine.simulate_turn()
@@ -35,7 +36,7 @@ def main():
 
     print("Hand:", [fmt_card(c) for c in hand])
 
-    print("Turn execution:")
+    print("\nTurn execution:")
     print("Strategy:", strategy.get_strategy_name())
     print("Actions:", data["result"])
 
