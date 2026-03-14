@@ -4,15 +4,16 @@ from .Rankable import Rankable
 from typing import Dict
 import random
 
+
 class TournamentCard(Card, Combatable, Rankable):
-    def __init__(self, card_id: str, name: str, cost: int = 3, rarity: str = "Common", base_rating: int = 1200):
+    def __init__(self, card_id: str, name: str, cost: int = 3,
+                 rarity: str = "Common", base_rating: int = 1200):
         super().__init__(name, cost, rarity)
         self.card_id = card_id
         self.wins = 0
         self.losses = 0
         self.rating = base_rating
 
-    # Rankable methods
     def calculate_rating(self) -> int:
         self.rating = 1200 + (self.wins - self.losses) * 16
         return self.rating
@@ -33,7 +34,6 @@ class TournamentCard(Card, Combatable, Rankable):
             "record": f"{self.wins}-{self.losses}"
         }
 
-    # Combatable methods
     def attack(self, target) -> Dict:
         outcome = random.choice([True, False])
         if outcome:
@@ -51,7 +51,6 @@ class TournamentCard(Card, Combatable, Rankable):
         }
 
     def defend(self, incoming_damage: int) -> Dict:
-        # مجرد مثال دفاعي بسيط
         blocked = min(5, incoming_damage)
         taken = max(0, incoming_damage - 5)
         return {
@@ -64,7 +63,6 @@ class TournamentCard(Card, Combatable, Rankable):
     def get_combat_stats(self) -> Dict:
         return {"attack": 5, "defense": 5}
 
-    # Card method
     def play(self, game_state: Dict) -> Dict:
         game_state["card_played"] = self.name
         game_state["mana_used"] = self.cost

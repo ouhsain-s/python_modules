@@ -2,6 +2,7 @@ from .TournamentCard import TournamentCard
 from typing import Dict, List
 import random
 
+
 class TournamentPlatform:
     def __init__(self):
         self.cards: Dict[str, TournamentCard] = {}
@@ -15,7 +16,8 @@ class TournamentPlatform:
     def create_match(self, card1_id: str, card2_id: str) -> Dict:
         card1 = self.cards[card1_id]
         card2 = self.cards[card2_id]
-        winner, loser = (card1, card2) if random.choice([True, False]) else (card2, card1)
+        winner, loser = (card1, card2) if random.choice([True, False])\
+            else (card2, card1)
         winner.update_wins(1)
         loser.update_losses(1)
         self.matches_played += 1
@@ -27,7 +29,8 @@ class TournamentPlatform:
         }
 
     def get_leaderboard(self) -> List[Dict]:
-        sorted_cards = sorted(self.cards.values(), key=lambda c: c.rating, reverse=True)
+        sorted_cards = sorted(self.cards.values(),
+                              key=lambda c: c.rating, reverse=True)
         leaderboard = []
         for idx, card in enumerate(sorted_cards, 1):
             leaderboard.append({
