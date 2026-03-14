@@ -9,7 +9,7 @@ class ArtifactCard(Card):
         self.durability = int(durability)
         self.effect = effect
 
-    def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
+    def play(self, game_state: Dict[str, Any]) -> dict:
         game_state["card_played"] = self.name
         game_state["mana_used"] = self.cost
         game_state["effect"] = self.effect

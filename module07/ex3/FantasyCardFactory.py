@@ -1,32 +1,7 @@
 from .CardFactory import CardFactory
-
-try:
-    from ex0.CreatureCard import CreatureCard
-except Exception:
-    CreatureCard = None
-
-try:
-    from ex1.SpellCard import SpellCard
-except Exception:
-    SpellCard = None
-
-try:
-    from ex1.ArtifactCard import ArtifactCard
-except Exception:
-    ArtifactCard = None
-
-
-# def try_instantiate(cls, *args_options):
-#     if cls is None:
-#         raise RuntimeError("Class not available")
-#     last_exc = None
-#     for args, kwargs in args_options:
-#         try:
-#             return cls(*args, **(kwargs or {}))
-#         except Exception as e:
-#             last_exc = e
-#     raise last_exc if last_exc is not None else\
-#         RuntimeError("Instantiation failed")
+from ex0.CreatureCard import CreatureCard
+from ex1.SpellCard import SpellCard
+from ex1.ArtifactCard import ArtifactCard
 
 
 class FantasyCardFactory(CardFactory):
@@ -69,7 +44,7 @@ class FantasyCardFactory(CardFactory):
             deck.append(self.create_spell("fireball"))
         except Exception:
             pass
-        return {"deck": deck[:max(0, int(size))]}
+        return {"deck": deck[:max(0, size)]}
 
     def get_supported_types(self) -> dict:
         return {

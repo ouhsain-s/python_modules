@@ -15,7 +15,7 @@ class TournamentCard(Card, Combatable, Rankable):
         self.rating = base_rating
 
     def calculate_rating(self) -> int:
-        self.rating = 1200 + (self.wins - self.losses) * 16
+        self.rating = self.rating + (self.wins - self.losses) * 16
         return self.rating
 
     def update_wins(self, wins: int) -> None:
