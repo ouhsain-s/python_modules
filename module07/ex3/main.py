@@ -42,7 +42,8 @@ def main():
     print("\nGame Report:")
     print(engine.get_engine_status())
 
-    print("\nAbstract Factory + Strategy Pattern: Maximum flexibility achieved!")
+    print("\nAbstract Factory + Strategy Pattern:"
+          " Maximum flexibility achieved!")
 
 
 if __name__ == "__main__":
