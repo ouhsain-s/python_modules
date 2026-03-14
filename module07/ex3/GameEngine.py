@@ -13,17 +13,17 @@ class GameEngine:
     def simulate_turn(self) -> dict:
         created = []
         try:
-            d = self.factory.create_creature("dragon")
+            d = self.factory.create_creature("Fire Dragon")
             created.append(d)
         except Exception:
             pass
         try:
-            g = self.factory.create_creature("goblin")
+            g = self.factory.create_creature("Goblin Warrior")
             created.append(g)
         except Exception:
             pass
         try:
-            s = self.factory.create_spell("fireball")
+            s = self.factory.create_spell("Lightning Bolt")
             created.append(s)
         except Exception:
             pass

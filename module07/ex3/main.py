@@ -6,13 +6,12 @@ from .AggressiveStrategy import AggressiveStrategy
 def fmt_card(card):
     if card is None:
         return "None"
-    name = getattr(card, "name", None)
-    cost = getattr(card, "cost", None)
-    if name is None:
-        name = getattr(card, "__class__", type(card)).__name__
-    if cost is None:
-        return f"{name}"
-    return f"{name} ({cost})"
+    try:
+        name = card.name
+        cost = card.cost
+        return f"{name} ({cost})"
+    except AttributeError:
+        return "Error"
 
 
 def main():
@@ -40,10 +39,10 @@ def main():
     print("Strategy:", strategy.get_strategy_name())
     print("Actions:", data["result"])
 
-    print("Game Report:")
+    print("\nGame Report:")
     print(engine.get_engine_status())
 
-    print("Abstract Factory + Strategy Pattern: Maximum flexibility achieved!")
+    print("\nAbstract Factory + Strategy Pattern: Maximum flexibility achieved!")
 
 
 if __name__ == "__main__":

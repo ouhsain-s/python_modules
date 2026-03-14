@@ -9,9 +9,12 @@ class AggressiveStrategy(GameStrategy):
         damage = 0
 
         for card in hand:
-            cost = getattr(card, "cost", None)
-            name = getattr(card, "name", None) or\
-                getattr(card, "__class__", type(card)).__name__
+            try:
+                cost = card.cost
+                name = card.name
+            except AttributeError:
+                cost = 0
+                name = card.__class__.__name__
 
             if isinstance(cost, (int, float)) and cost <= 3:
                 cards_played.append(name)
@@ -24,12 +27,12 @@ class AggressiveStrategy(GameStrategy):
                     cards_played.append(name)
                     mana_used += 3
                     damage += 3 + 1
-
+            battlefield = cards_played
         return {
-            "cards_played": cards_played,
+            "cards_played": battlefield,
             "mana_used": mana_used,
             "targets_attacked": ["Enemy Player"],
-            "damage_dealt": damage
+            "damage_dealt": int(damage)
         }
 
     def get_strategy_name(self) -> str:

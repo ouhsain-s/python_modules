@@ -16,53 +16,44 @@ except Exception:
     ArtifactCard = None
 
 
-def try_instantiate(cls, *args_options):
-    if cls is None:
-        raise RuntimeError("Class not available")
-    last_exc = None
-    for args, kwargs in args_options:
-        try:
-            return cls(*args, **(kwargs or {}))
-        except Exception as e:
-            last_exc = e
-    raise last_exc if last_exc is not None else\
-        RuntimeError("Instantiation failed")
+# def try_instantiate(cls, *args_options):
+#     if cls is None:
+#         raise RuntimeError("Class not available")
+#     last_exc = None
+#     for args, kwargs in args_options:
+#         try:
+#             return cls(*args, **(kwargs or {}))
+#         except Exception as e:
+#             last_exc = e
+#     raise last_exc if last_exc is not None else\
+#         RuntimeError("Instantiation failed")
 
 
 class FantasyCardFactory(CardFactory):
 
     def create_creature(self, name_or_power=None):
-        name = "Goblin Warrior"
+        if name_or_power:
+            name = name_or_power
+        else:
+            name = "Goblin Warrior"
         cost = 2
-        if name_or_power == "dragon":
-            name = "Fire Dragon"
+        if name_or_power == "Fire Dragon":
             cost = 5
-
-        tries = [
-            ((name, cost, "Common", 2, 2), {}),
-            ((name, cost, 2, 2), {}),
-            ((name, cost), {}),
-        ]
-        return try_instantiate(CreatureCard, *tries)
+        return CreatureCard(name, cost, "Common", 2, 2)
 
     def create_spell(self, name_or_power=None):
-        name = "Lightning Bolt" if not name_or_power else\
-            str(name_or_power).title()
-        tries = [
-            ((name, 3, "Common", "Deal 3 damage"), {}),
-            ((name, 3, "Deal 3 damage"), {}),
-            ((name, 3), {}),
-        ]
-        return try_instantiate(SpellCard, *tries)
+        if name_or_power:
+            name = name_or_power
+        else:
+            name = "Lightning Bolt"
+        return SpellCard(name, 3, "Common", "Deal 3 damage")
 
     def create_artifact(self, name_or_power=None):
-        name = "Mana Ring"
-        tries = [
-            ((name, 1, "Rare", "Permanent: +1 mana per turn"), {}),
-            ((name, 1, "Permanent: +1 mana per turn"), {}),
-            ((name, 1), {}),
-        ]
-        return try_instantiate(ArtifactCard, *tries)
+        if name_or_power:
+            name = name_or_power
+        else:
+            name = "Mana Ring"
+        return ArtifactCard(name, 1, "Rare", 3, "Permanent: +1 mana per turn")
 
     def create_themed_deck(self, size: int):
         deck = []
@@ -83,6 +74,6 @@ class FantasyCardFactory(CardFactory):
     def get_supported_types(self) -> dict:
         return {
             "creatures": ["dragon", "goblin"],
-            "spells": ["fireball", "lightning"],
+            "spells": ["fireball"],
             "artifacts": ["mana_ring"]
         }
