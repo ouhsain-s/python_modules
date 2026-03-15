@@ -1,8 +1,9 @@
 from alchemy.grimoire import record_spell, validate_ingredients
+from typing import Callable
 
 
 def record_spell_enj(spell_name: str, ingredients: str,
-                     validator_fn) -> str:
+                     validator_fn: Callable) -> str:
     valid = validator_fn(ingredients)
     if valid.endswith("INVALID"):
         return f"Spell rejected: {spell_name} ({valid})"

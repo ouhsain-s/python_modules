@@ -1,7 +1,8 @@
 import alchemy
+from typing import Callable
 
 
-def safe_call(func, name):
+def safe_call(func: Callable, name: str) -> None:
     result = func()
     print(f"{name}: {result}")
 
