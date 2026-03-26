@@ -1,11 +1,10 @@
 from .TournamentCard import TournamentCard
-from typing import Dict, List
 import random
 
 
 class TournamentPlatform:
     def __init__(self):
-        self.cards: Dict[str, TournamentCard] = {}
+        self.cards: dict = {}
         self.matches_played = 0
         self.platform_status = "active"
 
@@ -28,7 +27,7 @@ class TournamentPlatform:
             "loser_rating": loser.rating
         }
 
-    def get_leaderboard(self) -> List[Dict]:
+    def get_leaderboard(self) -> list:
         sorted_cards = sorted(self.cards.values(),
                               key=lambda c: c.rating, reverse=True)
         leaderboard = []
@@ -41,7 +40,7 @@ class TournamentPlatform:
             })
         return leaderboard
 
-    def generate_tournament_report(self) -> Dict:
+    def generate_tournament_report(self) -> dict:
         total_cards = len(self.cards)
         avg_rating = sum(c.rating for c in self.cards.values()) // total_cards\
             if total_cards else 0

@@ -1,13 +1,13 @@
 from ex0.Card import Card
-from typing import Dict, Any
 
 
 class SpellCard(Card):
-    def __init__(self, name: str, cost: int, rarity: str, effect_type: str):
+    def __init__(self, name: str, cost: int, rarity: str,
+                 effect_type: str) -> None:
         super().__init__(name, cost, rarity)
         self.effect_type = effect_type
 
-    def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
+    def play(self, game_state: dict) -> dict:
         effect_text = self.resolve_effect([])
         game_state["card_played"] = self.name
         game_state["mana_used"] = self.cost

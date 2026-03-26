@@ -3,7 +3,7 @@ from .FantasyCardFactory import FantasyCardFactory
 from .AggressiveStrategy import AggressiveStrategy
 
 
-def fmt_card(card):
+def fmt_card(card) -> None:
     if card is None:
         return "None"
     try:
@@ -14,7 +14,7 @@ def fmt_card(card):
         return "Error"
 
 
-def main():
+def main() -> None:
     print("=== DataDeck Game Engine ===\n")
     print("Configuring Fantasy Card Game...")
 

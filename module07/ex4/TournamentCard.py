@@ -1,13 +1,12 @@
 from ex0.Card import Card
 from ex2.Combatable import Combatable
 from .Rankable import Rankable
-from typing import Dict
 import random
 
 
 class TournamentCard(Card, Combatable, Rankable):
     def __init__(self, card_id: str, name: str, cost: int = 3,
-                 rarity: str = "Common", base_rating: int = 1200):
+                 rarity: str = "Common", base_rating: int = 1200) -> None:
         super().__init__(name, cost, rarity)
         self.card_id = card_id
         self.wins = 0
@@ -26,7 +25,7 @@ class TournamentCard(Card, Combatable, Rankable):
         self.losses += losses
         self.calculate_rating()
 
-    def get_rank_info(self) -> Dict:
+    def get_rank_info(self) -> dict:
         return {
             "card_id": self.card_id,
             "name": self.name,
@@ -34,7 +33,7 @@ class TournamentCard(Card, Combatable, Rankable):
             "record": f"{self.wins}-{self.losses}"
         }
 
-    def attack(self, target) -> Dict:
+    def attack(self, target) -> dict:
         outcome = random.choice([True, False])
         if outcome:
             self.update_wins(1)
@@ -50,7 +49,7 @@ class TournamentCard(Card, Combatable, Rankable):
             "outcome": "attacker" if outcome else "defender"
         }
 
-    def defend(self, incoming_damage: int) -> Dict:
+    def defend(self, incoming_damage: int) -> dict:
         blocked = min(5, incoming_damage)
         taken = max(0, incoming_damage - 5)
         return {
@@ -60,15 +59,15 @@ class TournamentCard(Card, Combatable, Rankable):
             "still_alive": True
         }
 
-    def get_combat_stats(self) -> Dict:
+    def get_combat_stats(self) -> dict:
         return {"attack": 5, "defense": 5}
 
-    def play(self, game_state: Dict) -> Dict:
+    def play(self, game_state: dict) -> dict:
         game_state["card_played"] = self.name
         game_state["mana_used"] = self.cost
         return game_state
 
-    def get_tournament_stats(self) -> Dict:
+    def get_tournament_stats(self) -> dict:
         return {
             "card_id": self.card_id,
             "name": self.name,

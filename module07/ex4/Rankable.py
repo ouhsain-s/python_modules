@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Dict
 
 
 class Rankable(ABC):
@@ -16,5 +15,5 @@ class Rankable(ABC):
         pass
 
     @abstractmethod
-    def get_rank_info(self) -> Dict:
+    def get_rank_info(self) -> dict:
         pass

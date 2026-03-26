@@ -11,7 +11,7 @@ def _callable_public_names(cls) -> list:
     ]
 
 
-def main():
+def main() -> None:
     print("=== DataDeck Ability System ===")
     print()
 
