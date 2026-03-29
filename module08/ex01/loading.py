@@ -15,9 +15,9 @@ def check_dependencies(packages):
             print(f"[MISSING] {name} - {description}")
 
 
-def generate_data(num_points):
-    x = 2 * numpy.random.rand(num_points)
-    y = 10 + 3 * x + numpy.random.rand(num_points)
+def generate_data(number_of_points):
+    x = numpy.random.rand(number_of_points) * 2
+    y = numpy.random.rand(number_of_points) + x * 5
     return pandas.DataFrame({'Feature_X': x, 'Target_y': y})
 
 
@@ -46,14 +46,14 @@ def main():
     except requests.RequestException:
         print("Warning: Unable to reach the internet.")
 
-    num_points = 1000
-    data = generate_data(num_points)
+    number_of_points = 1000
+    data = generate_data(number_of_points)
 
     output_file = "matrix_analysis.png"
     display_name = "matrix\\_analysis.png"
 
     print("\nAnalyzing Matrix data...")
-    print(f"Processing {num_points} data points...")
+    print(f"Processing {number_of_points} data points...")
     plot_data(data, output_file)
     print("Generating visualization...")
     print("\nAnalysis complete!")
