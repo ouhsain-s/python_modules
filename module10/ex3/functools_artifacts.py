@@ -99,7 +99,6 @@ def test_partial_enchanter():
     print()
 
 
-# ==== Run all tests ====
 if __name__ == "__main__":
     test_spell_reducer()
     test_memoized_fibonacci()
