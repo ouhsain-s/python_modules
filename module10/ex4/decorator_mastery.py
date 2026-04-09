@@ -5,7 +5,7 @@ from collections.abc import Callable
 
 def spell_timer(func: Callable) -> Callable:
     @wraps(func)
-    def wrapper():
+    def wrapper() -> None:
         print(f"Casting {func.__name__}...")
         start = time.time()
         func()
@@ -13,8 +13,20 @@ def spell_timer(func: Callable) -> Callable:
         print(f"Spell completed in {(end - start):.3f} seconds")
     return wrapper
 
-# def power_validator(min_power: int) -> Callable:
-#     @wraps()
+
+def power_validator(min_power: int) -> Callable:
+    def decorator(*args: tuple, **kwargs: dict) -> Callable:
+        def wrapper(*args: tuple, **kwargs: dict) -> str:
+            if args[0] >= min_power:
+                kwargs['func'](args[0])
+                return ""
+            return "Insufficient power for this spell"
+        return wrapper
+    return decorator
+
+
+
+
 # def retry_spell(max_attempts: int) -> Callable
 
 # class MageGuild:
