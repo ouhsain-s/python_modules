@@ -20,8 +20,7 @@ def power_validator(min_power: int) -> Callable:
         def wrapper(*args: tuple, **kwargs: dict) -> str:
             try:
                 if args[0] >= min_power:
-                    return (func(args[0], kwargs['type_p']) +
-                            f"...(parsed by {func.__name__})")
+                    return (func(*args, **kwargs))
 
             except (TypeError, KeyError, IndexError) as e:
                 print("Error:", e)
@@ -38,9 +37,9 @@ def power_validator(min_power: int) -> Callable:
 def retry_spell(max_attempts: int) -> Callable:
     def decorator(func: Callable):
         def wrapper(*args: tuple, **kwargs: dict) -> None:
-            for n in range(max_attempts):
+            for n in range(1, max_attempts):
                 try:
-                    func(args, kwargs)
+                    func(*args, **kwargs)
                     return
                 except Exception:
                     print("Spell failed, retrying... "
@@ -49,13 +48,25 @@ def retry_spell(max_attempts: int) -> Callable:
         return wrapper
     return decorator
 
-# class MageGuild:
-#     @staticmethod
-#     def validate_mage_name(name: str) -> bool
-#     def cast_spell(self, spell_name: str, power: int) -> str
+
+class MageGuild:
+    @staticmethod
+    def validate_mage_name(name: str) -> bool:
+        if len(name) >= 3:
+            for c in name:
+                if not c.isalpha() and c != ' ':
+                    return False
+            return True
+        return False
+
+    def cast_spell(self, spell_name: str, power: int) -> str:
+        if self.validate_mage_name(self.cast_spell):
+            
+        else:
+            return "Insufficient power for this spell"
 
 
-def testing_spell_timer():
+def testing_spell_timer() -> None:
     @spell_timer
     def fireball():
         for _ in range(10000000):
@@ -66,7 +77,7 @@ def testing_spell_timer():
     print(f"Result {fireball.__name__.capitalize()} cast!")
 
 
-def testing_power_validator():
+def testing_power_validator() -> None:
     print("Testing power validator...")
     my_dec = power_validator(10)
 
@@ -78,7 +89,25 @@ def testing_power_validator():
             return f"{type_p} power is not supported"
 
     print("result of validation:")
-    print(get_valid_power(23, type_p="4"))
+    print(get_valid_power(23, type_p="AC"))
+
+
+def testing_retry_spell() -> None:
+    print("Testing retrying spell...")
+    my_dec = retry_spell(3)
+
+    @my_dec
+    def n_valid_testing(value: int) -> None:
+        raise ValueError()
+        print(value)
+
+    @my_dec
+    def valid_test() -> None:
+        print("Waaaaaaagh spelled !")
+
+    n_valid_testing(5)
+    print()
+    valid_test()
 
 
 if __name__ == "__main__":
