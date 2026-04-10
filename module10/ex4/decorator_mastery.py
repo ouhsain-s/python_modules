@@ -50,6 +50,28 @@ def retry_spell(max_attempts: int) -> Callable:
 
 
 class MageGuild:
+
+    @staticmethod
+    def power_validator(min_power: int) -> Callable:
+        def decorator(func: Callable) -> Callable:
+            @wraps(func)
+            def wrapper(*args: tuple, **kwargs: dict) -> str:
+                try:
+                    power = kwargs.get('power', args[-1])
+                    if power >= min_power:
+                        return (func(*args, **kwargs))
+
+                except (TypeError, KeyError, IndexError) as e:
+                    print("Error:", e)
+                    chois = input("if you want to creat decorator"
+                                  " by defualt just pass \'y\'=> ")
+                    if chois == "y":
+                        return wrapper(10, type_p='AC')
+                    exit(1)
+                return "Insufficient power for this spell"
+            return wrapper
+        return decorator
+
     @staticmethod
     def validate_mage_name(name: str) -> bool:
         if len(name) >= 3:
@@ -59,9 +81,10 @@ class MageGuild:
             return True
         return False
 
+    @power_validator(min_power=10)
     def cast_spell(self, spell_name: str, power: int) -> str:
-        if self.validate_mage_name(self.cast_spell):
-            
+        if self.validate_mage_name(spell_name):
+            return f"Successfully cast {spell_name} with {power} power"
         else:
             return "Insufficient power for this spell"
 
@@ -110,5 +133,14 @@ def testing_retry_spell() -> None:
     valid_test()
 
 
+def testing_mageguild():
+    print("Testing MageGuild...")
+    mage = MageGuild()
+    print(mage.validate_mage_name(" Mage "))
+    print(mage.validate_mage_name("mage1"))
+    print(mage.cast_spell("Lightning", 15))
+    print(mage.cast_spell("baliiiz", 9))
+
+
 if __name__ == "__main__":
-    testing_power_validator()
+    testing_mageguild()
