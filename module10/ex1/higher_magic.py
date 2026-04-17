@@ -30,11 +30,15 @@ def spell_sequence(spells: list[Callable]) -> Callable:
 
 
 def fireball(target: str, power: int) -> str:
-    return f"Fireball hits {target}"
+    if power > 0:
+        return f"Fireball hits {target}"
+    return "power not enought"
 
 
 def heal(target: str, power: int) -> str:
-    return f"Heals {target}"
+    if power > 0:
+        return f"Heals {target}"
+    return "power not enought"
 
 
 def testing_spell_combiner() -> None:

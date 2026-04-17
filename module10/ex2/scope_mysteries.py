@@ -56,7 +56,7 @@ def testing_mage_counter() -> None:
     print("counter_b call 1:", b())
 
 
-def testing_spell_accumulator():
+def testing_spell_accumulator() -> None:
     base = 100
     add = 20
 
@@ -67,7 +67,7 @@ def testing_spell_accumulator():
     print(f"Base {base}, add {add}:", power_supply(add))
 
 
-def testing_enchantment_factory():
+def testing_enchantment_factory() -> None:
 
     print("Testing enchantment factory...")
     stat1 = enchantment_factory("Flaming")

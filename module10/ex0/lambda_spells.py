@@ -18,7 +18,7 @@ def mage_stats(mages: list[dict]) -> dict:
                                  mages)) / len(mages)}
 
 
-def testing_artifact_sorter():
+def testing_artifact_sorter() -> None:
     print("Testing artifact sorter...")
     artifacts = [{'name': "over to", 'power': 703, 'type': "transport"},
                  {'name': "homo horder", 'power': 333, 'type': "atack"},
@@ -39,7 +39,7 @@ def testing_artifact_sorter():
         print(e)
 
 
-def testing_spell_transformer():
+def testing_spell_transformer() -> None:
     print("Testing spell transformer...")
     spells = ["andercover", "move on", "fireball", "heal", "shield"]
 
@@ -52,7 +52,7 @@ def testing_spell_transformer():
         print(e)
 
 
-def testing_power_filter():
+def testing_power_filter() -> None:
     print("Testing power filter...")
     mages = [
         {'name': 'Gandalf', 'power': 100, 'element': 'light'},
@@ -74,7 +74,7 @@ def testing_power_filter():
         print(e)
 
 
-def testing_mage_stats():
+def testing_mage_stats() -> None:
     print("Testing mage stats...")
     mages = [
         {'name': 'Gandalf', 'power': 100, 'element': 'light'},

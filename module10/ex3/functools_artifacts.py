@@ -63,7 +63,7 @@ def spell_dispatcher() -> Callable[[Any], str]:
     return implement_spell
 
 
-def test_spell_reducer():
+def test_spell_reducer() -> None:
     print("Testing spell reducer...")
     spells = [10, 20, 30, 40]
     print("Sum:", spell_reducer(spells, "add"))
@@ -72,14 +72,14 @@ def test_spell_reducer():
     print()
 
 
-def test_memoized_fibonacci():
+def test_memoized_fibonacci() -> None:
     print("Testing memoized fibonacci...")
     for n in [0, 1, 10, 15]:
         print(f"Fib({n}):", memoized_fibonacci(n))
     print()
 
 
-def test_spell_dispatcher():
+def test_spell_dispatcher() -> None:
     print("Testing spell dispatcher...")
     dispatcher = spell_dispatcher()
     print(dispatcher(42))
@@ -89,7 +89,7 @@ def test_spell_dispatcher():
     print()
 
 
-def test_partial_enchanter():
+def test_partial_enchanter() -> None:
     print("Testing partial_enchanter...")
 
     def base_enchantment(power: int, element: str, target: str) -> str:

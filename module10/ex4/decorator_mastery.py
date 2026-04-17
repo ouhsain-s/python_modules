@@ -35,7 +35,7 @@ def power_validator(min_power: int) -> Callable:
 
 
 def retry_spell(max_attempts: int) -> Callable:
-    def decorator(func: Callable):
+    def decorator(func: Callable) -> Callable:
         def wrapper(*args: tuple, **kwargs: dict) -> None:
             for n in range(1, max_attempts):
                 try:
@@ -91,7 +91,7 @@ class MageGuild:
 
 def testing_spell_timer() -> None:
     @spell_timer
-    def fireball():
+    def fireball() -> None:
         for _ in range(10000000):
             pass
 
@@ -133,7 +133,7 @@ def testing_retry_spell() -> None:
     valid_test()
 
 
-def testing_mageguild():
+def testing_mageguild() -> None:
     print("Testing MageGuild...")
     mage = MageGuild()
     print(mage.validate_mage_name(" Mage "))
@@ -143,4 +143,10 @@ def testing_mageguild():
 
 
 if __name__ == "__main__":
+    testing_spell_timer()
+    print()
+    testing_power_validator()
+    print()
+    testing_retry_spell()
+    print()
     testing_mageguild()
